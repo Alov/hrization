@@ -38,7 +38,7 @@ public class HhCvReader implements CvReader{
         if (!file.getName().endsWith(PDF_FILE_PREFIX)) {
             throw new IllegalArgumentException("Not implemented yet");
         }
-
+        System.out.println("ya bomj");
         List<String> content = pdfService.parseTextFromPdf(file);
 
         var sb = new StringBuilder();
