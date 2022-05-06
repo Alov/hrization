@@ -15,6 +15,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.stream.Stream;
 
@@ -22,12 +23,12 @@ import java.util.stream.Stream;
 @Service
 public class PdfService {
 
-    public Stream<String> parseTextFromPdf(File file) {
+    public List<String> parseTextFromPdf(File file) {
         try {
             PDDocument document = PDDocument.load(file);
             PDFTextStripper stripper = new PDFTextStripper();
             String content = stripper.getText(document);
-            return Arrays.stream(content.split("\n"));
+            return Arrays.asList(content.split("\n"));
 
         } catch (IOException e) {
             log.info("Can not parse file: {}", file.getAbsolutePath());

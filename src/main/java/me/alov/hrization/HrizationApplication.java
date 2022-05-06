@@ -1,5 +1,6 @@
 package me.alov.hrization;
 
+import lombok.extern.slf4j.Slf4j;
 import me.alov.hrization.service.PdfService;
 import me.alov.hrization.util.CvReader;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,8 +10,11 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import java.io.File;
 
+@Slf4j
 @SpringBootApplication
 public class HrizationApplication implements CommandLineRunner {
+
+
 
     @Autowired
     private CvReader cvReader;
@@ -21,6 +25,7 @@ public class HrizationApplication implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-          cvReader.parseCv(new File("C:/Users/Ilya/Documents/cv.pdf"));
+        var candidate = cvReader.parseCv(new File("C:/Users/user/Documents/cv.pdf"));
+        log.info(candidate.toString());
     }
 }
