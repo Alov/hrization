@@ -10,11 +10,12 @@ import java.util.Optional;
 @Data
 @NoArgsConstructor
 public class CandidateDetails {
-
-    private String details;
+    private String personalInfo;
     private String requiredJob;
-    private String exp;
+    private String experience;
     private String education;
-    private String skills;
-    private String additionalInfo;
+    private String keySkills;
+    private String driversLicense;
+    private int desiredSalary;
+
 }
