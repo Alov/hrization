@@ -31,6 +31,11 @@ public class HhCvReader implements CvReader{
         keywords.put("Ключевые навыки", "skills");
         keywords.put("Дополнительная информация", "additionalInfo");
     }
+    public int setSalary(String[] text){
+        String[] ss  = text[1].split(" ");
+        String sss = ss[ss.length-2].replace(" ","");
+        return Integer.parseInt(sss);
+    }
 
     @Override
     public CandidateDetails parseCv(File file) {
@@ -48,29 +53,18 @@ public class HhCvReader implements CvReader{
             requiredJob+=content.get(i);
         }
         String s1 = requiredJob.replace("\r"," ");
-        String[] s2 = s1.split("Образование");
-        String[] s3 = s2[0].split("Опыт работы");
-        String[] s4 = s2[1].split("Ключевые навыки");
-        String[] s5 = s3[0].split("Желаемая должность и зарплата");
-        String[] s6 = s4[1].split("Опыт вождения");
-        s5[1] = s5[1].replace("Java-разработчик","");
-        String[] ss  = s5[1].split(" ");
-        String sss = ss[ss.length-2].replace(" ","");
-        candidate.setDesiredSalary(Integer.parseInt(sss));
-        candidate.setExperience(s3[1]);
-        candidate.setRequiredJob(s5[1]);
-        candidate.setKeySkills(s6[0]);
-        candidate.setEducation(s4[0]);
-        candidate.setPersonalInfo(s5[0]);
-        candidate.setDriversLicense(s6[1]);
-        System.out.println(s5[0]); //Personal info
-        System.out.println(s5[1]); //Required job
-        System.out.println(s3[1]); //Experience
-        System.out.println(s4[0]); //Education
-        System.out.println(s6[0]); //KeySkills
-        System.out.println(s6[1]); //Driver's license
-        //log.info("ВОТ ЖЕЛАЕМАЯ ДОЛЖНОСТЬ :"+s2[0]);
-       // log.info("ВОТ ЖЕЛАЕМАЯ ДОЛЖНОСТЬ :"+s2[1]);
+        String[] educationSeparation = s1.split("Образование");
+        String[] expSeparation = educationSeparation[0].split("Опыт работы");
+        String[] skillSeparation = educationSeparation[1].split("Ключевые навыки");
+        String[] salarySeparation = expSeparation[0].split("Желаемая должность и зарплата");
+        String[] driveSeparation = skillSeparation[1].split("Опыт вождения");
+        candidate.setDesiredSalary(setSalary(salarySeparation));
+        candidate.setExperience(expSeparation[1]);
+        candidate.setRequiredJob(salarySeparation[1]);
+        candidate.setKeySkills(driveSeparation[0]);
+        candidate.setEducation(skillSeparation[0]);
+        candidate.setPersonalInfo(salarySeparation[0]);
+        candidate.setDriversLicense(driveSeparation[1]);
         candidate.setRequiredJob(s1.toString());
    //     log.info("ВОТ ЖЕЛАЕМАЯ ДОЛЖНОСТЬ :"+s1);
         return candidate;
