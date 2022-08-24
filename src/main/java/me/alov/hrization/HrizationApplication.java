@@ -25,7 +25,7 @@ public class HrizationApplication implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        var candidate = cvReader.parseCv(new File("C:/Users/user/Documents/cv.pdf"));
+        var candidate = cvReader.parseCv(new File("C:/Users/hotta/Downloads/Shatalov_Ilya.pdf"));
         log.info(candidate.toString());
     }
 }
